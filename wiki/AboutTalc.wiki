@@ -3,11 +3,9 @@
 
 = About Talc =
 
-There's nothing available here yet, but Talc isn't vaporware. There's an AST-walking interpreter that's currently being rewritten as a compiler to JVM bytecode.
+Talc is currently implemented as an AST-walking interpreter, but I'm about to rewrite it as a compiler to JVM bytecode.
 
-I'll get something up as soon as I work out how to upload my existing Mercurial repository without losing the history.
-
-For now, here's the man page. Everything described here is implemented and working (except where it's explicitly described as unimplemented or not working).
+Here's the man page. Everything described here is implemented and working (except where it's explicitly described as unimplemented or not working).
 
 {{{
 TALC(1)                          User Commands                         TALC(1)
