@@ -1,4 +1,5 @@
 #summary How to build Talc.
+#labels Featured
 
 = How to build Talc =
 
