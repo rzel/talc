@@ -3,7 +3,7 @@
 
 = About Talc =
 
-Talc is currently implemented as an AST-walking interpreter, but I'm about to rewrite it as a compiler to JVM bytecode.
+Talc is currently implemented as an AST-walking interpreter, but I'm in the process of rewriting it as a compiler to JVM bytecode (the subset of the language without functions or classes has an implemented and working compiler).
 
 Here's the man page. Everything described here is implemented and working (except where it's explicitly described as unimplemented or not working).
 
@@ -35,16 +35,8 @@ DESCRIPTION
        of good compile-time error checking out with the bathwater of verbosity
        of simple tasks, Talc may be the language for you.
 
-       Talc  is also a calculator, primarily aimed at being useful to program‐
-       mers, but hopefully useful to a much wider audience.  It  offers  broad
-       C,  C++,  and  Java expression compatibility where possible, with a few
-       little extras.
-
-       Talc can be used from the command-line or, for more convenient editing,
-       via  a  GUI.   Unlike  most  GUI calculators, it doesn’t try to emulate
-       those familiar small plastic real-world devices because that turns  out
-       to  be  a  terrible way to input mathematical expressions, and wastes a
-       lot of screen space into the bargain, as we’ve all experienced.
+       Talc  offers broad C, C++, and Java expression compatibility where pos‐
+       sible, with a few little extras.
 
 FEATURES
        Talc’s features are best understood in comparison  to  other  scripting
@@ -126,7 +118,7 @@ LEXICAL STRUCTURE
        words are necessarily in use. Currently "class" is reserved but unused.
 
    Types
-       The basic types are "boolean", "int", "object", "real",  "string",  and
+       The basic types are "bool",  "int",  "object",  "real",  "string",  and
        "void". The type "object" is the root of the class hierarchy. All other
        types have "object" as an ancestor. The type  "void"  is  used  as  the
        return type for functions that return no value.
@@ -134,8 +126,8 @@ LEXICAL STRUCTURE
    Null literal
        The null literal is "null".
 
-   Boolean literals
-       The boolean literals are "true" and "false".
+   Bool literals
+       The bool literals are "true" and "false".
 
    Numeric literals
        Various  forms  of  numeric  literal are supported. The default base is
@@ -221,21 +213,25 @@ LEXICAL STRUCTURE
 
        Binary operators require the types of both operands to be the same. The
        type of the result is the same as the type of the operands, except  for
-       relational  operators,  whose  result is always boolean. (So dividing a
-       real by a real, for example, gives a real; dividing an int  by  an  int
-       gives  an  int,  and it’s not possible to divide a real by an int or an
-       int by a real without explicitly converting one or the other to  disam‐
-       biguate.)
+       relational  operators, whose result is always bool. (So dividing a real
+       by a real, for example, gives a real; dividing an int by an  int  gives
+       an int, and it’s not possible to divide a real by an int or an int by a
+       real without explicitly converting one or the other to disambiguate.)
 
-       The  operators  "%",  "<<",  ">>", "&", "~", "|", "^", and "!" (postfix
+       The operators "%", "<<", ">>", "&", "~", "|",  "^",  and  "!"  (postfix
        factorial) only operate on type int.
 
-       The operators "!" (prefix logical negation), "&&", and "||" only  oper‐
-       ate on type boolean.
+       The  operators "!" (prefix logical negation), "&&", and "||" only oper‐
+       ate on type bool.
 
        There are also the following compound assignment operators: "+=", "-=",
        "*=", "**=", "/=", "%=", "<<=", ">>=", "&=", "|=", "^=", with the usual
-       C-family  interpretation where "a op= b" is equivalent to "a = a op b".
+       C-family interpretation where "a op= b" is equivalent to "a = a op  b".
+
+       There  are  also  the array operators "[]" and "[]=" for array indexing
+       and array assignment respectively. An expression such  as  "puts(a[i])"
+       is  translated  into  "puts(a.__get_item__(i))",  while "a[i] = f()" is
+       translated into "a.__set_item__(i, f())".
 
        You can create new instances of classes with the "new" operator.
 
@@ -371,7 +367,7 @@ SYNTAX
            return "many";
          }
 
-       All guard expressions must be of boolean type or a  compile-time  error
+       All guard expressions must be of type  bool  or  a  compile-time  error
        results.
 
    While loops
@@ -385,11 +381,11 @@ SYNTAX
            ++n;
          }
 
-       The expression must be of boolean type or a compile-time error results.
+       The expression must be of type bool or a compile-time error results.
 
    Do loops
-       A "do" loop executes a block and an  expression  repeatedly  until  the
-       expression  evaluates  to  false.  The block will always be executed at
+       A  "do"  loop  executes  a block and an expression repeatedly until the
+       expression evaluates to false. The block will  always  be  executed  at
        least once.
 
          n: int = 0;
@@ -398,13 +394,13 @@ SYNTAX
            ++n;
          } while (n < 5);
 
-       The expression must be of boolean type or a compile-time error results.
+       The expression must be of type bool or a compile-time error results.
 
    For loops
        A  "for" loop initializes a variable local to the statement before exe‐
        cuting a continuation expression, a block,  and  an  update  expression
        until  the continuation expression evaluates to false. The continuation
-       expression must be of boolean type of a compile-time error results. The
+       expression must be of type bool or a compile-time  error  results.  The
        update expression can be of any type.
 
          for (n: int = 0; n < 5; ++n) {
@@ -531,16 +527,16 @@ BUILT-IN FUNCTIONALITY
        Talc  has  relatively few built-in classes. Few enough that we can rea‐
        sonably comfortably summarize them all here.
 
-       boolean : object
+       bool : object
 
        file : object
          append(content: string) : void
-         exists() : boolean
+         exists() : bool
          file(filename: string) : file
-         is_directory() : boolean
-         is_executable() : boolean
-         mkdir() : boolean
-         mkdir_p() : boolean
+         is_directory() : bool
+         is_executable() : bool
+         mkdir() : bool
+         mkdir_p() : bool
          read() : string
          read_lines() : list<string>
          realpath() : file
@@ -555,11 +551,12 @@ BUILT-IN FUNCTIONALITY
          to_r() : real
 
        list<T> : object
+         __get_item__(index: int) : T
+         __set_item__(index: int, value: T) : void
          add_all(others: list<T>) : list<T>
          clear() : list<T>
-         contains(value: T) : boolean
-         get(index: int) : T
-         is_empty() : boolean
+         contains(value: T) : bool
+         is_empty() : bool
          join(separator: string) : string
          length() : int
          list() : list<T>
@@ -569,24 +566,23 @@ BUILT-IN FUNCTIONALITY
          pop_front() : T
          push_back(value: T) : list<T>
          push_front(value: T) : list<T>
-         put(index: int, value: T) : void
          remove_all(others: list<T>) : list<T>
          remove_at(index: int) : list<T>
-         remove_first(value: T) : boolean
+         remove_first(value: T) : bool
          reverse() : list<T>
          sort() : list<T>
          to_s() : string
          uniq() : list<T>
 
        map<K,V> : object
+         __get_item__(key: K) : V
+         __set_item__(key: K, value: V) : void
          clear() : map<K,V>
-         get(key: K) : V
-         has_key(key: K) : boolean
-         has_value(value: V) : boolean
+         has_key(key: K) : bool
+         has_value(value: V) : bool
          keys() : list<K>
          length() : int
          map() : map<K,V>
-         put(key: K, value: V) : void
          remove(key: K) : map<K,V>
          values() : list<V>
 
@@ -607,8 +603,8 @@ BUILT-IN FUNCTIONALITY
          to_r() : real
 
        string : object
-         contains(substring: string) : boolean
-         ends_with(suffix: string) : boolean
+         contains(substring: string) : bool
+         ends_with(suffix: string) : bool
          escape_html() : string
          gsub(pattern: string, replacement: string) : string
          lc() : string
@@ -617,7 +613,7 @@ BUILT-IN FUNCTIONALITY
          match(pattern: string) : match
          replace(old: string, new: string) : string
          split(pattern: string) : list<string>
-         starts_with(prefix: string) : boolean
+         starts_with(prefix: string) : bool
          sub(pattern: string, replacement: string) : string
          to_i() : int
          to_r() : real
@@ -757,16 +753,17 @@ REPORTING BUGS
        Report bugs to <software@jessies.org>.
 
 COPYRIGHT
-       Copyright © 2007-2008 Elliott Hughes.
+       Copyright  ©  2007-2008  Elliott  Hughes.   Parts copyright © 2000-2007
+       INRIA, France Telecom.
 
-       Talc  is  free software; you can redistribute it and/or modify it under
-       the terms of the GNU General Public License as published  by  the  Free
-       Software  Foundation;  either  version  3  of  the License, or (at your
+       Talc is free software; you can redistribute it and/or modify  it  under
+       the  terms  of  the GNU General Public License as published by the Free
+       Software Foundation; either version 3  of  the  License,  or  (at  your
        option) any later version.
 
        Talc is distributed in the hope that it will be useful, but WITHOUT ANY
-       WARRANTY;  without even the implied warranty of MERCHANTABILITY or FIT‐
-       NESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License  for
+       WARRANTY; without even the implied warranty of MERCHANTABILITY or  FIT‐
+       NESS  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
        more details.
 
        You should have received a copy of the GNU General Public License along
