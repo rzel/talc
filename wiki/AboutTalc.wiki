@@ -3,7 +3,7 @@
 
 = About Talc =
 
-Talc is currently implemented as an AST-walking interpreter, but I'm in the process of rewriting it as a compiler to JVM bytecode (the subset of the language without global variables or user-defined classes has an implemented and working compiler).
+Talc is currently implemented as an AST-walking interpreter, but I'm in the process of rewriting it as a compiler to JVM bytecode (the subset of the language without the for-each loop or user-defined classes has an implemented and working compiler).
 
 Here's the man page. Everything described here is implemented and working (except where it's explicitly described as unimplemented or not working).
 
