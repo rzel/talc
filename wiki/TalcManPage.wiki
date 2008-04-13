@@ -1,5 +1,4 @@
 #labels Featured
-=TALC(1) MANUAL PAGE=
 ==NAME==
 talc - a C-family statically-typed scripting language
 ==SYNOPSIS==
@@ -15,7 +14,7 @@ Talc's features are best understood in comparison to other scripting languages:
 
 *Run-time compiled*
 
-  ` `Talc is a compiled language, but you don't have to recompile programs before executing them. From the user's perspective, it's interpreted, but behind the scenes, the interpreter works by compiling to JVM bytecode. This process is very fast, and the short time it takes is quickly made up by the performance of the compiled code, which is much faster than the old interpreter.
+  ` `Talc is a compiled language, but you don't have to recompile programs before executing them. From the user's perspective, it's interpreted, but behind the scenes, the interpreter works by compiling to JVM bytecode. This process is very fast, and the short time it takes is quickly made up by the performance of the compiled code, which is much faster than the old AST-walking interpreter.
 
 *Variables have types (static typing)*
 
@@ -292,7 +291,7 @@ There are a few global variables:
 
 *ARGS: final list<string>*
 
-  ` `The arguments to the script. Arguments to the interpreter itself aren't visible to the script.
+  ` `The arguments to the script. Arguments to Talc itself aren't visible to the script.
 
 *FILE`_`SEPARATOR: final string*
 
@@ -310,7 +309,7 @@ There are a handful of global functions:
 
 *exit(status: int) : void*
 
-  ` `Exits the interpreter, reporting the given status to the parent process.
+  ` `Exits the running program, reporting the given status to the parent process.
 
 *getenv(name: string) : string*
 
@@ -403,8 +402,6 @@ list<T> : object
 
   join(separator: string) : string
 
-  length() : int
-
   list() : list<T>
 
   peek`_`back() : T
@@ -427,6 +424,8 @@ list<T> : object
 
   reverse() : list<T>
 
+  size() : int
+
   sort() : list<T>
 
   to`_`s() : string
@@ -447,11 +446,11 @@ map<K,V> : object
 
   keys() : list<K>
 
-  length() : int
-
   map() : map<K,V>
 
   remove(key: K) : map<K,V>
+
+  size() : int
 
   values() : list<V>
 
@@ -495,11 +494,11 @@ string : object
 
   lc`_`first() : string
 
-  length() : int
-
   match(pattern: string) : match
 
   replace(old: string, new: string) : string
+
+  size() : int
 
   split(pattern: string) : list<string>
 
@@ -586,9 +585,12 @@ Losing the "function" keyword completely. As long as you have to write the paren
 It might also be useful to support both "mod" and and "rem", though the likely confusion inherent in the fact that % is actually "rem" but generally called mod speaks against this. VHDL users report that the "mod"/"rem" distinction isn't very useful, but they're unlikely to be using signed values in the first place.
 ==REPORTING BUGS==
 Report bugs at [http://code.google.com/p/talc/issues/list http://code.google.com/p/talc/issues/list].
+==ACKNOWLEDGMENTS==
+Talc uses a lightly modified version of the MPL 1.1/GPL 2 or later Rhino bytecode generator from the org.mozilla.classfile package, written by Roger Lawrence.
+
+The original Rhino source and binaries can found at [http://www.mozilla.org/rhino/download.html http://www.mozilla.org/rhino/download.html]. The Talc sources are available at <http://code.google.com/p/talc/>.
 ==COPYRIGHT==
 Copyright © 2007-2008 Elliott Hughes.
-Parts copyright © 2000-2007 INRIA, France Telecom.
 
 
 Talc is free software; you can redistribute it and/or modify
