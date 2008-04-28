@@ -1,8 +1,8 @@
-#summary About Talc.
+﻿#summary About Talc.
 #labels Featured
 
 = About Talc =
 
-Talc is currently implemented as an AST-walking interpreter and as a compiler to JVM bytecode. I'm working up the courage to ditch the interpreter.
+Talc is currently implemented as a compiler to JVM bytecode. The command-line interface is roughly equivalent to that of other scripting languages.
 
 See TalcManPage for the full manual, translated to code.google.com's wiki markup format from the original groff(1) source by a Talc script.
