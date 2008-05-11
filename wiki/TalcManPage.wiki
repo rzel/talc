@@ -492,6 +492,8 @@ object
 real : object
   abs() : real
 
+  cbrt() : real
+
   log(base: real) : real
 
   log10() : real
@@ -508,6 +510,8 @@ real : object
 
 
 string : object
+  `_``_`get`_`item`_``_`(index: int) : string
+
   contains(substring: string) : bool
 
   ends`_`with(suffix: string) : bool
