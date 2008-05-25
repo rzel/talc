@@ -63,9 +63,8 @@ With no arguments, interactive mode is entered. Expressions will be read from st
   ` `No special rules apply.
   ` `No output will be produced unless the program calls an output function.
 
--*f* _file_
-  ` `File mode.
-  ` `Program text is read from _file_ instead of entering interactive mode.
+-*I* _directory_
+  ` `Add _directory_ to the library search path used by "import".
 ==LEXICAL STRUCTURE==
 ===Comments===
 Shell-like comments begin with a # and extend to the end of the line. C++-like comments begin with // and extend to the end of the line. Other than the use of # and //, shell- and C++-style comments are treated identically to one another.
