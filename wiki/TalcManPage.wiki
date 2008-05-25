@@ -62,6 +62,8 @@ With no arguments, interactive mode is entered. Expressions will be read from st
   ` `The _program_ is evaluated.
   ` `No special rules apply.
   ` `No output will be produced unless the program calls an output function.
+  ` `Multiple -e arguments will be concatenated together into a single program.
+  ` `Any given invocation of talc can use -e or an explicit script filename, never both.
 
 -*I* _directory_
   ` `Add _directory_ to the library search path used by "import".
