@@ -67,6 +67,12 @@ With no arguments, interactive mode is entered. Expressions will be read from st
 
 -*I* _directory_
   ` `Add _directory_ to the library search path used by "import".
+
+-*n*
+  ` `Adds 'while ((`_` = gets()) != null) { ... }' around the user-supplied script. Note that the variable corresponding to the current line is called `_` rather than $`_`.
+
+-*p*
+  ` `Adds 'while ((`_` = gets()) != null) { ... puts(`_`); }' around the user-supplied script. Note that the variable corresponding to the current line is called `_` rather than $`_`.
 ==LEXICAL STRUCTURE==
 ===Comments===
 Shell-like comments begin with a # and extend to the end of the line. C++-like comments begin with // and extend to the end of the line. Other than the use of # and //, shell- and C++-style comments are treated identically to one another.
