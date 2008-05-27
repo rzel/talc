@@ -275,7 +275,7 @@ A "for" loop initializes a variable local to the statement before executing a co
     puts(n);
   }
 }}}
-Note that the initializer is more restricted than in most similar languages, though this restriction may be lifted in future.
+Note that Talc's for loop is slightly more restricted than in most C-family languages, because Talc has no comma operator.
 ===For-each loops===
 A for-each loop iterates over a collection, evaluating a block once for each value in the collection. For example:
 {{{
@@ -284,7 +284,7 @@ A for-each loop iterates over a collection, evaluating a block once for each val
     puts(s);
   }
 
-  # Iterate over the keys, value pairs in the collection:
+  # Iterate over the key, value pairs in the collection:
   for (i, w in [ "hello", "world" ]) {
     puts(i, " : ", s);
   }
@@ -302,7 +302,11 @@ A "break" statement transfers control out of the innermost enclosing "do", "for"
 ===Continue statements===
 A "continue" statement transfers control to the loop-continuation test of the innermost enclosing "do", "for", or "while" statement.
 ===Return statements===
-A "return" statement returns control to the invoker of a function. If the enclosing function has return type "void", supplying a non-void expression to the "return" statement will result in a compile-time error. Otherwise, omitting an expression or providing an expression of an inappropriate type will result in compile-time errors.
+A "return" statement returns control to the invoker of a function.
+
+If the enclosing function has return type "void", supplying a non-void expression to the "return" statement will result in a compile-time error, but an expression of void type, such as a call to a void function, is fine.
+
+For non-void functions, omitting an expression or providing an expression of an inappropriate type will result in compile-time errors.
 ===Assert statements===
 An "assert" statement consists of a boolean expression optionally followed by an explanatory expression of any type. If the boolean expression evaluates to false, an exception is thrown. If an explanatory expression was provided, it will be evaluated and used as the exception's detail message. If the boolean expression evaluates to true, the "assert" statement completes normally.
 {{{
