@@ -199,15 +199,15 @@ As proof that this isn't unsafe, note that the usual case where you can't use th
 ===Function definitions===
 A function definition looks like this:
 {{{
-  function nCr(n: int, r: int) : int {
+  function int nCr(n: int, r: int) {
     return n!/(k! * (n-k)!);
   }
 }}}
-The keyword "function" followed by the function name introduces each definition. A parenthesized comma-separated list of parameter declarations follows. Finally comes a colon and the return type followed by a block for the function's body.
+The keyword "function" followed by the return type and function name introduces each definition. A parenthesized comma-separated list of parameter declarations follows. Finally comes a block for the function's body.
 
 Note that multiple parameters of the same type can be separated by commas:
 {{{
-  function draw_line(x0, y0, x1, y1: int, c: color) : void {
+  function void draw_line(x0, y0, x1, y1: int, c: color) {
     // ...
   }
 }}}
@@ -237,17 +237,17 @@ A class definition looks like this:
     x: int = 0;
     y: int = 0;
 
-    function Point(x0: int, y0: int) : Point {
+    function Point(x0: int, y0: int) {
       x = x0;
       y = y0;
     }
 
-    function to_s() : string {
+    function string to_s() {
       return "(" + x.to_s() + "," + y.to_s() + ")";
     }
   }
 }}}
-The body of a class definition contains zero or more variable definitions mixed with zero or more function definitions. A function with the same name and return type as the class is the constructor, invoked by the "new" operator to initialize new instances.
+The body of a class definition contains zero or more variable definitions mixed with zero or more function definitions. A function with the same name as the class (and no return type) is the constructor, invoked by the "new" operator to initialize new instances.
 ===Empty statements===
 The empty statement (";") does nothing.
 ===Expression statements===
@@ -426,175 +426,179 @@ Talc has relatively few built-in classes. Few enough that we can reasonably comf
 bool : object
 
 file : object
-  append(content: string) : void
+  void append(content: string)
 
-  exists() : bool
+  string basename()
 
-  file(filename: string) : file
+  file dirname()
 
-  is`_`directory() : bool
+  bool exists()
 
-  is`_`executable() : bool
+  file(filename: string)
 
-  mkdir() : bool
+  bool is`_`directory()
 
-  mkdir`_`p() : bool
+  bool is`_`executable()
 
-  read() : string
+  bool mkdir()
 
-  read`_`lines() : list<string>
+  bool mkdir`_`p()
 
-  realpath() : file
+  string read()
 
-  write(content: string) : void
+  list<string> read`_`lines()
+
+  file realpath()
+
+  void write(content: string)
 
 
 int : object
-  abs() : int
+  int abs()
 
-  signum() : int
+  int signum()
 
-  to`_`base(base: int) : string
+  string to`_`base(base: int)
 
-  to`_`char() : string
+  string to`_`char()
 
-  to`_`i() : int
+  int to`_`i()
 
-  to`_`r() : real
+  real to`_`r()
 
 
 list<T> : object
-  `_``_`get`_`item`_``_`(index: int) : T
+  T `_``_`get`_`item`_``_`(index: int)
 
-  `_``_`set`_`item`_``_`(index: int, value: T) : T
+  T `_``_`set`_`item`_``_`(index: int, value: T)
 
-  add`_`all(others: list<T>) : list<T>
+  list<T> add`_`all(others: list<T>)
 
-  clear() : list<T>
+  list<T> clear()
 
-  contains(value: T) : bool
+  bool contains(value: T)
 
-  is`_`empty() : bool
+  bool is`_`empty()
 
-  join(separator: string) : string
+  string join(separator: string)
 
-  list() : list<T>
+  list<T>()
 
-  peek`_`back() : T
+  T peek`_`back()
 
-  peek`_`front() : T
+  T peek`_`front()
 
-  pop`_`back() : T
+  T pop`_`back()
 
-  pop`_`front() : T
+  T pop`_`front()
 
-  push`_`back(value: T) : list<T>
+  list<T> push`_`back(value: T)
 
-  push`_`front(value: T) : list<T>
+  list<T> push`_`front(value: T)
 
-  remove`_`all(others: list<T>) : list<T>
+  list<T> remove`_`all(others: list<T>)
 
-  remove`_`at(index: int) : list<T>
+  list<T> remove`_`at(index: int)
 
-  remove`_`first(value: T) : bool
+  bool remove`_`first(value: T)
 
-  reverse() : list<T>
+  list<T> reverse()
 
-  size() : int
+  int size()
 
-  sort() : list<T>
+  list<T> sort()
 
-  to`_`s() : string
+  string to`_`s()
 
-  uniq() : list<T>
+  list<T> uniq()
 
 
 map<K,V> : object
-  `_``_`get`_`item`_``_`(key: K) : V
+  V `_``_`get`_`item`_``_`(key: K)
 
-  `_``_`set`_`item`_``_`(key: K, value: V) : V
+  V `_``_`set`_`item`_``_`(key: K, value: V)
 
-  clear() : map<K,V>
+  map<K,V> clear()
 
-  has`_`key(key: K) : bool
+  bool has`_`key(key: K)
 
-  has`_`value(value: V) : bool
+  bool has`_`value(value: V)
 
-  keys() : list<K>
+  list<K> keys()
 
-  map() : map<K,V>
+  map<K,V>()
 
-  remove(key: K) : map<K,V>
+  map<K,V> remove(key: K)
 
-  size() : int
+  int size()
 
-  values() : list<V>
+  list<V> values()
 
 
 match : object
-  group(n: int) : string
+  string group(n: int)
 
 
 object
-  to`_`s() : string
+  string to`_`s()
 
 
 real : object
-  abs() : real
+  real abs()
 
-  cbrt() : real
+  real cbrt()
 
-  log(base: real) : real
+  real log(base: real)
 
-  log10() : real
+  real log10()
 
-  logE() : real
+  real logE()
 
-  signum() : real
+  real signum()
 
-  sqrt() : real
+  real sqrt()
 
-  to`_`i() : int
+  int to`_`i()
 
-  to`_`r() : real
+  real to`_`r()
 
 
 string : object
-  `_``_`get`_`item`_``_`(index: int) : string
+  string `_``_`get`_`item`_``_`(index: int)
 
-  contains(substring: string) : bool
+  bool contains(substring: string)
 
-  ends`_`with(suffix: string) : bool
+  bool ends`_`with(suffix: string)
 
-  escape`_`html() : string
+  string escape`_`html()
 
-  gsub(pattern: string, replacement: string) : string
+  string gsub(pattern: string, replacement: string)
 
-  lc() : string
+  string lc()
 
-  lc`_`first() : string
+  string lc`_`first()
 
-  match(pattern: string) : match
+  match match(pattern: string)
 
-  replace(old: string, new: string) : string
+  string replace(old: string, new: string)
 
-  size() : int
+  int size()
 
-  split(pattern: string) : list<string>
+  list<string> split(pattern: string)
 
-  starts`_`with(prefix: string) : bool
+  bool starts`_`with(prefix: string)
 
-  sub(pattern: string, replacement: string) : string
+  string sub(pattern: string, replacement: string)
 
-  to`_`i() : int
+  int to`_`i()
 
-  to`_`r() : real
+  real to`_`r()
 
-  trim() : string
+  string trim()
 
-  uc() : string
+  string uc()
 
-  uc`_`first() : string
+  string uc`_`first()
 
 
 This output was produced by the command "talc --dump-classes".
@@ -654,9 +658,11 @@ Talc arose out of dissatisfaction with existing scripting languages, in particul
 
 `*` You can't please all the people all the time. Worse, trying to do so ends up pleasing no-one. (Hence, Perl, Python, and Ruby aren't so much the competition as alternative lifestyle choices, interesting only when they provide useful precedent.)
 
+`*` A scripting language for professional programmers should assume it's not the user's primary language. This makes it important to strive for something easy to learn and easy to remember, both of which seem to imply that it should aim to be like the user's primary language: a member of the C family. It also seems to imply that it's better to offer a few general data structures than every possibility.
+
 At the same time, it would be naive to pretend that some choices don't also have negative consequences:
 
-`*` You can't avoid all syntactic confusion. No-one gets confused switching between, say, Java and Lisp. They look too different. But switching between C++ and Java, it's easy to confuse "bool" and "boolean", for example. The languages as a whole are superficially quite similar, so the little differences cause needless trouble. And since the languages of the C family already contain plenty of these little traps for those switching between them, it's impossible for a new C-family language like Talc to avoid both inheriting and adding to this confusion. Whose for-each syntax to use? Whose way of specifying superclass and interfaces? Whose names for the common types and functions?
+`*` You can't avoid all syntactic confusion. No-one gets confused switching between, say, Java and Lisp. They look too different. But switching between C++ and Java, it's easy to confuse "bool" and "boolean", for example. The languages as a whole are superficially quite similar, so the little differences cause needless trouble. And since the languages of the C family already contain plenty of these little traps for those switching between them, it's impossible for a new C-family language like Talc to avoid both inheriting and adding to this confusion. Whose for-each syntax to use? Whose way of specifying superclass and interfaces? Whose names for the common types and functions? Part of being a convenient scripting language is not causing unnecessary interference with the user's primary language. The idea of "implicit void", for example, while handy in Talc, encourages people to omit "void" return types when they go back to C++ or Java, a cost that probably outweighs the benefit.
 ==BUGS==
 Talc is not yet ready for production use.
 
