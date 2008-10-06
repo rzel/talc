@@ -156,6 +156,8 @@ There are also the array operators "`[``]`" and "`[``]`=" for array indexing and
 You can create new instances of classes with the "new" operator.
 
 FIXME: detail operator precedence.
+
+FIXME: explain equality/inequality.
 ==SYNTAX==
 ===Blocks===
 A block is a sequence of statements surrounded by braces such as:
@@ -363,23 +365,23 @@ There are a few global variables:
 ===Built-in functions===
 There are a handful of global functions:
 
-*backquote(command: string) : string*
+*string backquote(command: string)*
 
   ` `Captures the output of the given command as a string.
 
-*exit(status: int) : void*
+*void exit(status: int)*
 
   ` `Exits the running program, reporting the given status to the parent process.
 
-*getenv(name: string) : string*
+*string getenv(name: string)*
 
   ` `Returns the value of the given environment variable, or null.
 
-*gets() : string*
+*string gets()*
 
   ` `Returns the next line from stdin, or null if there's an error or no more input.
 
-*print(...) : void*
+*void print(...)*
 
   ` `The "print" function is special; it takes an arbitrary number of arguments of arbitrary types, converts each one to a string and outputs it to stdout. It is not currently possible to write such functions in the language itself.
   ` `
@@ -393,31 +395,31 @@ There are a handful of global functions:
   ` `}}}
   ` `for example.
 
-*printf(format: string, ...) : void*
+*void printf(format: string, ...)*
 
   ` `The "printf" function takes a format string followed by an arbitrary number of arguments of arbitrary types. It offers C-like formatting of the arguments based on format specifiers in the format string. It's useful for sophisticated formatting, but less efficient than "print" or "puts".
 
-*prompt(prompt: string) : string*
+*string prompt(prompt: string)*
 
   ` `Prompts for input, using the given text, and returns what the user enters.
 
-*puts(...) : void*
+*void puts(...)*
 
   ` `Like "print", but appends a newline.
 
-*rnd(n: int) : int*
+*int rnd(n: int)*
 
   ` `Returns a random integer between 0 (inclusive) and n (exclusive).
 
-*shell(command: string) : int*
+*int shell(command: string)*
 
   ` `Executes the given command in a subshell. Returns the return status of the command, or -1 if it was unable to start the command.
 
-*system(command: list<string>) : int*
+*int system(command: list<string>)*
 
   ` `Executes the given command, specified as a list containing the program name and its arguments. Returns the return status of the command, or -1 if it was unable to start the command.
 
-*time`_`ms() : int*
+*int time`_`ms()*
 
   ` `Returns the time in milliseconds since the program started.
 ===Built-in classes===
