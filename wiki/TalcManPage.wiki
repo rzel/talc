@@ -104,13 +104,13 @@ Integer literals are arbitrary precision. Real literals are currently machine pr
 ===String literals===
 String literals are surrounded by single quotes 'like this' or double quotes "like this". There is no difference between the two kinds of string: they are provided merely as a convenience. Use ' if your string contains ", use " if your string contains ', and use " if you've no reason to choose between the two.
 
-The common escape characters "\\b", "\\e", "\\f", "\\n", "\\r", and "\\t" are supported and translated into ASCII backspace, ESC, form-feed, newline, carriage return, and tab respectively. The characters ", ', and \\ may also be escaped to stand for themselves. Unicode escapes of the form "\\uXXXX" where each X represents a hex digit are also supported. An attempt to escape any other character is an error.
+The common escape characters "\b", "\e", "\f", "\n", "\r", and "\t" are supported and translated into ASCII backspace, ESC, form-feed, newline, carriage return, and tab respectively. The characters ", ', and \ may also be escaped to stand for themselves. Unicode escapes of the form "\uXXXX" where each X represents a hex digit are also supported. An attempt to escape any other character is an error.
 
 Raw string literals are prefixed by a commercial at, @'like this' or @"like this". Backslash escape sequences are disabled in raw string literals, allowing convenient writing of otherwise awkward strings:
 {{{
-  path := @"c:\\windows\\paths\\";
+  path := @"c:\windows\paths\";
 
-  pattern := @"regular\\s+expressions";
+  pattern := @"regular\s+expressions";
 
   hint := @"embed double quotes like ""this""";
   easier := 'embed double quotes like "this"';
@@ -165,7 +165,7 @@ A block is a sequence of statements surrounded by braces such as:
   {
     print("hello");
     print(" ");
-    print("world\\n");
+    print("world\n");
   }
 }}}
 A block is executed by executing each statement in order from first to last, though some statements may terminate the execution of the block.
@@ -188,7 +188,7 @@ As a shorthand, the type may be omitted, in which case the type is taken to be t
   i := 0;                 # implicitly i:int
   r := 0.0;               # implicitly r:real
   s := "hello, world!";   # implicitly s:string
-  lines := s.split("\\n"); # implicitly lines:list<string>
+  lines := s.split("\n"); # implicitly lines:list<string>
   constant: final = 123;  # implicitly constant:final int
 }}}
 Note that although the ":" and "=" are two separate tokens, it's conventional not to add whitespace between them.
@@ -227,7 +227,7 @@ Note that in the rare case where the variable "i" is replaced by a numeric liter
 ===Extern function definitions===
 An extern function definition looks like this:
 {{{
-  extern "Java" function cos(a:real):real = "java/lang/Math.cos:(D)D";
+  extern "Java" function real cos(a:real) = "java/lang/Math.cos:(D)D";
 }}}
 The string literal after extern describes the calling convention. Currently only "Java" is supported.
 
@@ -357,7 +357,7 @@ There are a few global variables:
 
 *FILE`_`SEPARATOR: final string*
 
-  ` `The underlying platform's native filename component separator. (On Unix, this is "/"; Windows uses "\\".)
+  ` `The underlying platform's native filename component separator. (On Unix, this is "/"; Windows uses "\".)
 
 *PATH`_`SEPARATOR: final string*
 
@@ -622,18 +622,18 @@ for (line:string in lines) {
   # Most verbose (but not by much).
   # Necessary if you need access to the match outside of the "if".
   m:match = null;
-  if ((m = line.match(@"\\s*function\\s+(\\S+)\\s*\\((.*)\\)\\s*")) != null) {
+  if ((m = line.match(@"\s*function\s+(\S+)\s*\((.*)\)\s*")) != null) {
     name:string = m.group(1);
     arguments:string = m.group(2);
   }
 
   # Less verbose unless you have a lot of patterns to match against.
-  if ((m:match = line.match(@"\\s*function\\s+(\\S+)\\s*\\((.*)\\)\\s*")) != null) {
+  if ((m:match = line.match(@"\s*function\s+(\S+)\s*\((.*)\)\s*")) != null) {
     # As before.
   }
 
   # Least verbose unless you have a lot of patterns to match against.
-  if ((m := line.match(@"\\s*function\\s+(\\S+)\\s*\\((.*)\\)\\s*")) != null) {
+  if ((m := line.match(@"\s*function\s+(\S+)\s*\((.*)\)\s*")) != null) {
     # As before.
   }
 }
