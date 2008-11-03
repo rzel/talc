@@ -427,7 +427,12 @@ Talc has relatively few built-in classes. Few enough that we can reasonably comf
 
 bool : object
 
+
 file : object
+
+  file(filename: string)
+
+
   void append(content: string)
 
   string basename()
@@ -435,8 +440,6 @@ file : object
   file dirname()
 
   bool exists()
-
-  file(filename: string)
 
   bool is`_`directory()
 
@@ -455,7 +458,9 @@ file : object
   void write(content: string)
 
 
+
 int : object
+
   int abs()
 
   int signum()
@@ -469,7 +474,12 @@ int : object
   real to`_`r()
 
 
+
 list<T> : object
+
+  list<T>()
+
+
   T `_``_`get`_`item`_``_`(index: int)
 
   T `_``_`set`_`item`_``_`(index: int, value: T)
@@ -483,8 +493,6 @@ list<T> : object
   bool is`_`empty()
 
   string join(separator: string)
-
-  list<T>()
 
   T peek`_`back()
 
@@ -515,7 +523,12 @@ list<T> : object
   list<T> uniq()
 
 
+
 map<K,V> : object
+
+  map<K,V>()
+
+
   V `_``_`get`_`item`_``_`(key: K)
 
   V `_``_`set`_`item`_``_`(key: K, value: V)
@@ -528,8 +541,6 @@ map<K,V> : object
 
   list<K> keys()
 
-  map<K,V>()
-
   map<K,V> remove(key: K)
 
   int size()
@@ -537,15 +548,21 @@ map<K,V> : object
   list<V> values()
 
 
+
 match : object
+
   string group(n: int)
 
 
+
 object
+
   string to`_`s()
 
 
+
 real : object
+
   real abs()
 
   real cbrt()
@@ -565,7 +582,9 @@ real : object
   real to`_`r()
 
 
+
 string : object
+
   string `_``_`get`_`item`_``_`(index: int)
 
   bool contains(substring: string)
