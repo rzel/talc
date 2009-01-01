@@ -430,196 +430,199 @@ bool : object
 
 file : object
 
-  file(filename: string)
+                 file(filename: string)
 
 
-  void append(content: string)
+            void append(content: string)
 
-  string basename()
+          string basename()
 
-  file dirname()
+            file dirname()
 
-  bool exists()
+            bool exists()
 
-  bool is`_`directory()
+            bool is`_`directory()
 
-  bool is`_`executable()
+            bool is`_`executable()
 
-  bool mkdir()
+            bool mkdir()
 
-  bool mkdir`_`p()
+            bool mkdir`_`p()
 
-  string read()
+          string read()
 
-  list<string> read`_`lines()
+    list<string> read`_`lines()
 
-  file realpath()
+            file realpath()
 
-  void write(content: string)
+            void write(content: string)
 
 
 
 int : object
 
-  int abs()
+             int abs()
 
-  int signum()
+             int signum()
 
-  string to`_`base(base: int)
+          string to`_`base(base: int)
 
-  string to`_`char()
+          string to`_`char()
 
-  int to`_`i()
+             int to`_`i()
 
-  real to`_`r()
+            real to`_`r()
 
 
 
 list<T> : object
 
-  list<T>()
+                 list<T>()
 
 
-  T `_``_`get`_`item`_``_`(index: int)
+               T `_``_`get`_`item`_``_`(index: int)
 
-  T `_``_`set`_`item`_``_`(index: int, value: T)
+               T `_``_`set`_`item`_``_`(index: int, value: T)
 
-  list<T> add`_`all(others: list<T>)
+         list<T> add`_`all(others: list<T>)
 
-  list<T> clear()
+         list<T> clear()
 
-  bool contains(value: T)
+            bool contains(value: T)
 
-  bool is`_`empty()
+            bool is`_`empty()
 
-  string join(separator: string)
+          string join(separator: string)
 
-  T peek`_`back()
+               T peek`_`back()
 
-  T peek`_`front()
+               T peek`_`front()
 
-  T pop`_`back()
+               T pop`_`back()
 
-  T pop`_`front()
+               T pop`_`front()
 
-  list<T> push`_`back(value: T)
+         list<T> push`_`back(value: T)
 
-  list<T> push`_`front(value: T)
+         list<T> push`_`front(value: T)
 
-  list<T> remove`_`all(others: list<T>)
+         list<T> remove`_`all(others: list<T>)
 
-  list<T> remove`_`at(index: int)
+         list<T> remove`_`at(index: int)
 
-  bool remove`_`first(value: T)
+            bool remove`_`first(value: T)
 
-  list<T> reverse()
+         list<T> reverse()
 
-  int size()
+             int size()
 
-  list<T> sort()
+         list<T> sort()
 
-  string to`_`s()
+          string to`_`s()
 
-  list<T> uniq()
+         list<T> uniq()
 
 
 
 map<K,V> : object
 
-  map<K,V>()
+                 map<K,V>()
 
 
-  V `_``_`get`_`item`_``_`(key: K)
+               V `_``_`get`_`item`_``_`(key: K)
 
-  V `_``_`set`_`item`_``_`(key: K, value: V)
+               V `_``_`set`_`item`_``_`(key: K, value: V)
 
-  map<K,V> clear()
+        map<K,V> clear()
 
-  bool has`_`key(key: K)
+            bool has`_`key(key: K)
 
-  bool has`_`value(value: V)
+            bool has`_`value(value: V)
 
-  list<K> keys()
+         list<K> keys()
 
-  map<K,V> remove(key: K)
+        map<K,V> remove(key: K)
 
-  int size()
+             int size()
 
-  list<V> values()
+         list<V> values()
 
 
 
 match : object
 
-  string group(n: int)
+          string group(n: int)
 
 
 
 object
 
-  string to`_`s()
+          string to`_`s()
 
 
 
 real : object
 
-  real abs()
+            real abs()
 
-  real cbrt()
+            real cbrt()
 
-  real log(base: real)
+            real log(base: real)
 
-  real log10()
+            real log10()
 
-  real logE()
+            real logE()
 
-  real signum()
+            real signum()
 
-  real sqrt()
+            real sqrt()
 
-  int to`_`i()
+             int to`_`i()
 
-  real to`_`r()
+            real to`_`r()
 
 
 
 string : object
 
-  string `_``_`get`_`item`_``_`(index: int)
+          string `_``_`get`_`item`_``_`(index: int)
 
-  bool contains(substring: string)
+            bool contains(substring: string)
 
-  bool ends`_`with(suffix: string)
+            bool ends`_`with(suffix: string)
 
-  string escape`_`html()
+          string escape`_`html()
 
-  string gsub(pattern: string, replacement: string)
+          string gsub(pattern: string, replacement: string)
 
-  string lc()
+          string lc()
 
-  string lc`_`first()
+          string lc`_`first()
 
-  match match(pattern: string)
+           match match(pattern: string)
 
-  string replace(old: string, new: string)
+     list<match> match`_`all(pattern: string)
 
-  int size()
+          string replace(old: string, new: string)
 
-  list<string> split(pattern: string)
+             int size()
 
-  bool starts`_`with(prefix: string)
+    list<string> split(pattern: string)
 
-  string sub(pattern: string, replacement: string)
+            bool starts`_`with(prefix: string)
 
-  int to`_`i()
+          string sub(pattern: string, replacement: string)
 
-  real to`_`r()
+             int to`_`i()
 
-  string trim()
+            real to`_`r()
 
-  string uc()
+          string trim()
 
-  string uc`_`first()
+          string uc()
+
+          string uc`_`first()
+
 
 
 This output was produced by the command "talc --dump-classes".
