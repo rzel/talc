@@ -394,10 +394,8 @@ There are a handful of global functions:
   ` `  print("value", v);
   ` `}}}
   ` `for example.
-
-*void printf(format: string, ...)*
-
-  ` `The "printf" function takes a format string followed by an arbitrary number of arguments of arbitrary types. It offers C-like formatting of the arguments based on format specifiers in the format string. It's useful for sophisticated formatting, but less efficient than "print" or "puts".
+  ` `
+  ` `Note also that the string.format method means that both print and puts (and any other function) can enjoy printf-like formatting.
 
 *string prompt(prompt: string)*
 
@@ -592,6 +590,8 @@ string : object
             bool ends`_`with(suffix: string)
 
           string escape`_`html()
+
+          string format(...)
 
           string gsub(pattern: string, replacement: string)
 
