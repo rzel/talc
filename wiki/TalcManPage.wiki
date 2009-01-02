@@ -422,7 +422,7 @@ There are a handful of global functions:
   ` `Returns the time in milliseconds since the program started.
 ===Built-in classes===
 Talc has relatively few built-in classes. Few enough that we can reasonably comfortably summarize them all here.
-
+{{{
 bool : object
 
 
@@ -430,121 +430,70 @@ file : object
 
                  file(filename: string)
 
-
             void append(content: string)
-
           string basename()
-
             file dirname()
-
             bool exists()
-
-            bool is`_`directory()
-
-            bool is`_`executable()
-
+            bool is_directory()
+            bool is_executable()
             bool mkdir()
-
-            bool mkdir`_`p()
-
+            bool mkdir_p()
           string read()
-
-    list<string> read`_`lines()
-
+    list<string> read_lines()
             file realpath()
-
             void write(content: string)
-
 
 
 int : object
 
              int abs()
-
              int signum()
-
-          string to`_`base(base: int)
-
-          string to`_`char()
-
-             int to`_`i()
-
-            real to`_`r()
-
+          string to_base(base: int)
+          string to_char()
+             int to_i()
+            real to_r()
 
 
 list<T> : object
 
                  list<T>()
 
-
-               T `_``_`get`_`item`_``_`(index: int)
-
-               T `_``_`set`_`item`_``_`(index: int, value: T)
-
-         list<T> add`_`all(others: list<T>)
-
+               T __get_item__(index: int)
+               T __set_item__(index: int, value: T)
+         list<T> add_all(others: list<T>)
          list<T> clear()
-
             bool contains(value: T)
-
-            bool is`_`empty()
-
+            bool is_empty()
           string join(separator: string)
-
-               T peek`_`back()
-
-               T peek`_`front()
-
-               T pop`_`back()
-
-               T pop`_`front()
-
-         list<T> push`_`back(value: T)
-
-         list<T> push`_`front(value: T)
-
-         list<T> remove`_`all(others: list<T>)
-
-         list<T> remove`_`at(index: int)
-
-            bool remove`_`first(value: T)
-
+               T peek_back()
+               T peek_front()
+               T pop_back()
+               T pop_front()
+         list<T> push_back(value: T)
+         list<T> push_front(value: T)
+         list<T> remove_all(others: list<T>)
+         list<T> remove_at(index: int)
+            bool remove_first(value: T)
          list<T> reverse()
-
              int size()
-
          list<T> sort()
-
-          string to`_`s()
-
+          string to_s()
          list<T> uniq()
-
 
 
 map<K,V> : object
 
                  map<K,V>()
 
-
-               V `_``_`get`_`item`_``_`(key: K)
-
-               V `_``_`set`_`item`_``_`(key: K, value: V)
-
+               V __get_item__(key: K)
+               V __set_item__(key: K, value: V)
         map<K,V> clear()
-
-            bool has`_`key(key: K)
-
-            bool has`_`value(value: V)
-
+            bool has_key(key: K)
+            bool has_value(value: V)
          list<K> keys()
-
         map<K,V> remove(key: K)
-
              int size()
-
          list<V> values()
-
 
 
 match : object
@@ -552,79 +501,47 @@ match : object
           string group(n: int)
 
 
-
 object
 
-          string to`_`s()
-
+          string to_s()
 
 
 real : object
 
             real abs()
-
             real cbrt()
-
             real log(base: real)
-
             real log10()
-
             real logE()
-
             real signum()
-
             real sqrt()
-
-             int to`_`i()
-
-            real to`_`r()
-
+             int to_i()
+            real to_r()
 
 
 string : object
 
-          string `_``_`get`_`item`_``_`(index: int)
-
+          string __get_item__(index: int)
             bool contains(substring: string)
-
-            bool ends`_`with(suffix: string)
-
-          string escape`_`html()
-
+            bool ends_with(suffix: string)
+          string escape_html()
           string format(...)
-
           string gsub(pattern: string, replacement: string)
-
           string lc()
-
-          string lc`_`first()
-
+          string lc_first()
            match match(pattern: string)
-
-     list<match> match`_`all(pattern: string)
-
+     list<match> match_all(pattern: string)
           string replace(old: string, new: string)
-
              int size()
-
     list<string> split(pattern: string)
-
-            bool starts`_`with(prefix: string)
-
+            bool starts_with(prefix: string)
           string sub(pattern: string, replacement: string)
-
-             int to`_`i()
-
-            real to`_`r()
-
+             int to_i()
+            real to_r()
           string trim()
-
           string uc()
-
-          string uc`_`first()
-
-
-
+          string uc_first()
+}}}
 This output was produced by the command "talc --dump-classes".
 ==CONVENTIONS AND IDIOMS==
 Talc scripts that are runnable as applications in their own right should have no extension.
